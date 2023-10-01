@@ -1,16 +1,16 @@
 module.exports = {
-  parser: "@typescript-eslint/parser",
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     tsconfigRootDir: __dirname,
-    project: "./tsconfig.json",
+    project: './tsconfig.json',
     ecmaVersion: 2020,
-    sourceType: "module",
+    sourceType: 'module',
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
   extends: [
-    "next",
+    'next',
     'airbnb-typescript',
     'plugin:import/errors',
     'plugin:import/warnings',
@@ -19,27 +19,16 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
   ],
-  plugins: ["@typescript-eslint", "react-hooks", "prettier"],
-  ignorePatterns: ["src/**/*.test.ts"],
+  plugins: ['@typescript-eslint', 'react-hooks', 'prettier'],
+  ignorePatterns: ['src/**/*.test.ts'],
   settings: {
     react: { version: 'detect' },
     'import/parsers': {
-      '@typescript-eslint/parser': [
-        '.js',
-        '.jsx',
-        '.ts',
-        '.tsx',
-      ],
+      '@typescript-eslint/parser': ['.js', '.jsx', '.ts', '.tsx'],
     },
     'import/resolver': {
       node: {
-        extensions: [
-          '.js',
-          '.jsx',
-          '.ts',
-          '.tsx',
-          '.scss',
-        ],
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss'],
       },
       typescript: {},
     },
@@ -48,39 +37,23 @@ module.exports = {
     camelcase: 0,
     'prettier/prettier': 'error',
     radix: 'warn',
-    semi: [
-      'error',
-      'never',
-    ],
+    semi: ['error', 'never'],
     'consistent-return': 'off',
     'no-plusplus': 'warn',
     'no-console': [
       'error',
       {
-        allow: [
-          'error',
-          'warn',
-          'info',
-        ],
+        allow: ['error', 'warn', 'info'],
       },
     ],
-    'arrow-parens': [
-      'error',
-      'always',
-    ],
-    'arrow-body-style': [
-      'error',
-      'as-needed',
-    ],
+    'arrow-parens': ['error', 'always'],
+    'arrow-body-style': ['error', 'as-needed'],
     'no-nested-ternary': 'warn',
     'no-param-reassign': 'warn',
     'no-underscore-dangle': 'warn',
     'no-unused-expressions': 'off',
     'class-methods-use-this': 'off',
-    'no-multiple-empty-lines': [
-      'error',
-      { max: 1 },
-    ],
+    'no-multiple-empty-lines': ['error', { max: 1 }],
     'no-extra-parens': 0,
     'no-restricted-syntax': ['off'],
     'no-shadow': 'warn',
@@ -106,27 +79,18 @@ module.exports = {
     ],
     'import/extensions': 0,
     'import/no-extraneous-dependencies': 0,
-    'import/prefer-default-export': [
-      0,
-      'never',
-    ],
+    'import/prefer-default-export': [0, 'never'],
     'jsx-a11y/label-has-associated-control': [
       'error',
       {
         required: {
-          some: [
-            'nesting',
-            'id',
-          ],
+          some: ['nesting', 'id'],
         },
       },
     ],
     'jsx-a11y/no-autofocus': 'warn',
     // Typescript
-    '@typescript-eslint/semi': [
-      'error',
-      'never',
-    ],
+    '@typescript-eslint/semi': ['error', 'never'],
     '@typescript-eslint/lines-between-class-members': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unused-expressions': 'off',
@@ -151,27 +115,16 @@ module.exports = {
       'error',
       {
         selector: 'variable',
-        format: [
-          'camelCase',
-          'PascalCase',
-          'UPPER_CASE',
-          'snake_case',
-        ],
+        format: ['camelCase', 'PascalCase', 'UPPER_CASE', 'snake_case'],
         leadingUnderscore: 'allow',
       },
       {
         selector: 'function',
-        format: [
-          'camelCase',
-          'PascalCase',
-        ],
+        format: ['camelCase', 'PascalCase'],
       },
       {
         selector: 'enum',
-        format: [
-          'UPPER_CASE',
-          'PascalCase',
-        ],
+        format: ['UPPER_CASE', 'PascalCase'],
       },
       {
         selector: 'typeLike',
@@ -182,10 +135,7 @@ module.exports = {
 
     // React
     'react/jsx-closing-tag-location': 'error',
-    'react/destructuring-assignment': [
-      0,
-      'always',
-    ],
+    'react/destructuring-assignment': [0, 'always'],
     'react/jsx-key': 'error',
     'react/prefer-stateless-function': 'warn',
     'react/no-array-index-key': 'warn',
@@ -201,4 +151,4 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
   },
-};
+}
