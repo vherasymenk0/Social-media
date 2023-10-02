@@ -4,17 +4,17 @@ import React from 'react'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 
-const Header = (props) => (
+const Header = (props: {}) => (
   <Stack spacing={2} direction="row">
-    <Button variant="outlined">
-      <Link href="/">Home</Link>
-    </Button>
-    <Button variant="outlined">
-      <Link href="/sign-in">Sign-in</Link>
-    </Button>
-    <Button variant="outlined">
-      <Link href="/sign-up">Sign-up</Link>
-    </Button>
+    <Link href="/">
+      <Button variant="outlined">Home</Button>
+    </Link>
+    <Link href="/login">
+      <Button variant="outlined">Sign-in</Button>
+    </Link>
+    <Link href="/register">
+      <Button variant="outlined">Sign-up</Button>
+    </Link>
   </Stack>
 )
 

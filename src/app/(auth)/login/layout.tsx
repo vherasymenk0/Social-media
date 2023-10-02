@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import { ReactNode } from 'react'
 
 export const metadata: Metadata = {
-  title: 'Sing-up page',
+  title: 'Login page',
 }
 
-export default function SignUpLayout({ children }: { children: ReactNode }) {
+export default function LoginLayout({ children }: { children: ReactNode }) {
   return children
 }
