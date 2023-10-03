@@ -1,5 +1,7 @@
-import { Box } from '@mui/material'
+import React from 'react'
+
+import ForgotPasswordView from '~/views/forgot-password/ForgotPassword.view'
 
 export default function ForgotPasswordPage() {
-  return <Box>forgot password page</Box>
+  return <ForgotPasswordView />
 }
