@@ -1,3 +1,5 @@
+import RegisterView from '~/views/register/Register.view'
+
 export default function RegisterPage() {
-  return <h1>Sign-up page</h1>
+  return <RegisterView />
 }

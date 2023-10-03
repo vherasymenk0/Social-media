@@ -6,7 +6,7 @@ import { Box, Container, Paper, TextField, Typography } from '@mui/material'
 import Button from '@mui/material/Button'
 import Link from '@mui/material/Link'
 
-const LoginPageView = () => {
+const RegisterPageView = () => {
   const onSubmit = (e) => {
     e.preventDefault()
     console.log('e -->', e)
@@ -65,4 +65,4 @@ const LoginPageView = () => {
   )
 }
 
-export default LoginPageView
+export default RegisterPageView
