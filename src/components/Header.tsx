@@ -7,13 +7,10 @@ import Stack from '@mui/material/Stack'
 const Header = (props: {}) => (
   <Stack spacing={2} direction="row">
     <Link href="/">
-      <Button variant="outlined">Home</Button>
-    </Link>
-    <Link href="/login">
-      <Button variant="outlined">Sign-in</Button>
+      <Button variant="outlined">Login</Button>
     </Link>
     <Link href="/register">
-      <Button variant="outlined">Sign-up</Button>
+      <Button variant="outlined">Register</Button>
     </Link>
   </Stack>
 )
