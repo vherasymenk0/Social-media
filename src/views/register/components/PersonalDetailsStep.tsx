@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 
-import BasicDatePicker from '~/components/BasicDatePicker'
+import BaseDatePicker from '~/components/BaseDatePicker'
 import { COUNTRIES_LIST } from '~/utils/constants/countries.constant'
 
 import { Autocomplete, Box, TextField, Typography } from '@mui/material'
@@ -39,7 +39,7 @@ const PersonalDetailsStep = () => (
             />
           )}
         />
-        <BasicDatePicker disableFuture label="Date of Birth" sx={{ width: '48%' }} />
+        <BaseDatePicker disableFuture label="Date of Birth" sx={{ width: '48%' }} />
       </Box>
     </Box>
   </Box>

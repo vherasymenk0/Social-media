@@ -1,19 +1,32 @@
-import { Roboto } from 'next/font/google'
+import Typography from '~/theme/typography'
 
 import { createTheme } from '@mui/material/styles'
-
-const roboto = Roboto({
-  weight: ['300', '400', '500', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-})
 
 const theme = createTheme({
   palette: {
     mode: 'light',
+    background: {
+      default: '#fff',
+    },
+    primary: {
+      main: '#4E5D78',
+      light: '#717D93',
+    },
+    secondary: {
+      main: '#377DFF',
+    },
+    success: {
+      main: '#4bb34b',
+    },
+    grey: {
+      A700: '#F9FAFB',
+      A400: '#F6F7F8',
+      A200: '#979EAC',
+    },
   },
-  typography: {
-    fontFamily: roboto.style.fontFamily,
+  typography: { ...Typography },
+  shape: {
+    borderRadius: 3,
   },
   components: {
     MuiAlert: {
