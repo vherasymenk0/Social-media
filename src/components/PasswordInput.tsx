@@ -6,25 +6,37 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import { TextField } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
+import { TextFieldProps } from '@mui/material/TextField/TextField'
 
-interface PasswordInputProps {}
-
-const PasswordInput: FC<PasswordInputProps> = ({}) => {
+const PasswordInput: FC<Omit<TextFieldProps, 'variant'>> = ({
+  sx,
+  size,
+  label,
+  placeholder = 'password',
+  ...props
+}) => {
   const [showPassword, setShowPassword] = useState(false)
-
   const handleClickShowPassword = () => setShowPassword((show) => !show)
+
+  const isSmallSize = size === 'small'
+  const iconFontSize = isSmallSize ? '1.25rem' : '1.5rem'
 
   return (
     <TextField
       fullWidth
-      label="Your Password"
+      label={label}
       type={showPassword ? 'text' : 'password'}
-      placeholder="password"
+      placeholder={placeholder}
       autoComplete="current-password"
       sx={{ mb: 0.5 }}
+      size={size}
       InputProps={{
         startAdornment: (
-          <HttpsIcon color="primary" fontSize="small" sx={{ marginRight: '0.5rem' }} />
+          <HttpsIcon
+            color="primary"
+            fontSize="small"
+            sx={{ marginRight: '0.5rem', fontSize: iconFontSize }}
+          />
         ),
         endAdornment: (
           <InputAdornment position="end">
@@ -40,6 +52,7 @@ const PasswordInput: FC<PasswordInputProps> = ({}) => {
         ),
         sx: { borderRadius: (theme) => theme.shape.borderRadius },
       }}
+      {...props}
     />
   )
 }

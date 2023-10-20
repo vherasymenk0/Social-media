@@ -18,8 +18,8 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
 
   return (
     <Box component="form" autoComplete="off" onSubmit={onSubmit}>
-      <EmailInput />
-      <PasswordInput />
+      <EmailInput sx={{ mb: 3 }} />
+      <PasswordInput label="Your Password" />
       <Stack
         direction="row"
         justifyContent="space-between"
