@@ -4,7 +4,7 @@ import BaseButton from '~/components/BaseButton'
 import EmailInput from '~/components/EmailInput'
 import PasswordInput from '~/components/PasswordInput'
 import useTimer from '~/hooks/useTimer'
-import Toaster from '~/services/Toaster.service'
+import Toaster from '~/services/toaster/Toaster.service'
 import ConfirmCode from '~/views/forgot-password/components/ConfirmCode'
 import RequestTimer from '~/views/forgot-password/components/RequestTimer'
 
@@ -19,7 +19,6 @@ const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({}) => {
   const [isConfirmed, setIsConfirmed] = useState(false)
   const { toggleTimer, timerStarted, counter } = useTimer({ initValue: 20 })
 
-  const onSubmit = () => {}
   const updatePassword = () => {
     setIsCodeSent(false)
     setIsConfirmed(false)

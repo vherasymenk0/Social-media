@@ -11,7 +11,7 @@ function webpack(config) {
 }
 
 module.exports = {
-  reactStrictMode: true,
+  // reactStrictMode: true,
   swcMinify: true,
   modularizeImports: {
     '@mui/icons-material': {
