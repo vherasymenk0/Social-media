@@ -1,10 +1,15 @@
 'use client'
+import dynamic from 'next/dynamic'
 import React from 'react'
 
 import PaperCard from '~/components/PaperCard'
-import ForgotPasswordForm from '~/views/forgot-password/components/ForgotPasswordForm'
 
 import { Container, Typography } from '@mui/material'
+
+const ForgotPasswordForm = dynamic(
+  () => import('~/views/forgot-password/components/ForgotPasswordForm'),
+  { ssr: false }
+)
 
 const ForgotPasswordView = () => (
   <Container

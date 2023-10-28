@@ -1,38 +1,20 @@
 import React from 'react'
 
-import { Box, TextField, Typography } from '@mui/material'
+import EmailInput from '~/components/EmailInput'
+import PasswordInput from '~/components/PasswordInput'
+
+import { Box, Typography } from '@mui/material'
 
 const AccountSetupStep = () => (
   <>
     <Box>
-      <Typography variant="h4" component="h1" marginBottom="2rem" align="center">
+      <Typography variant="h4" component="h1" marginBottom="2rem" align="center" color="primary">
         Login Details
       </Typography>
       <Box>
-        <TextField
-          id="email"
-          fullWidth
-          label="Email"
-          type="email"
-          placeholder="exmple@gmail.com"
-          margin="normal"
-        />
-        <TextField
-          id="password"
-          fullWidth
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-          margin="normal"
-        />
-
-        <TextField
-          id="confirm_password"
-          fullWidth
-          label="Confirm password"
-          type="password"
-          margin="normal"
-        />
+        <EmailInput />
+        <PasswordInput id="password" label="Password" margin="normal" />
+        <PasswordInput id="confirm_password" label="Confirm password" margin="normal" />
       </Box>
     </Box>
   </>

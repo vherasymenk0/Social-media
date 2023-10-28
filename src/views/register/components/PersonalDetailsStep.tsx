@@ -2,9 +2,9 @@
 import React from 'react'
 
 import BaseDatePicker from '~/components/BaseDatePicker'
-import { COUNTRIES_LIST } from '~/utils/constants/countries.constant'
+import LocationSelector from '~/views/register/components/LocationSelector'
 
-import { Autocomplete, Box, TextField, Typography } from '@mui/material'
+import { Box, TextField, Typography } from '@mui/material'
 
 const PersonalDetailsStep = () => (
   <Box>
@@ -12,35 +12,39 @@ const PersonalDetailsStep = () => (
       Profile Details
     </Typography>
     <Box>
-      <Box display="flex" justifyContent="space-between">
-        <TextField id="first-name" label="First name" type="text" placeholder="John" />
-        <TextField id="last-name" label="Last name" type="text" placeholder="Doe" />
-      </Box>
-      <TextField id="about_me" label="About Me" multiline rows={3} fullWidth margin="normal" />
-      <Box display="flex" justifyContent="space-between" mt="0.5rem">
-        <Autocomplete
-          id="country-select-demo"
-          sx={{ width: '48%' }}
-          options={COUNTRIES_LIST}
-          autoHighlight
-          renderOption={(props, option) => (
-            <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-              {option}
-            </Box>
-          )}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Choose a country"
-              inputProps={{
-                ...params.inputProps,
-                autoComplete: 'new-password',
-              }}
-            />
-          )}
+      <Box display="flex" justifyContent="space-between" gap={2}>
+        <TextField
+          id="first-name"
+          placeholder="John"
+          label="First name"
+          variant="outlined"
+          size="small"
+          sx={{ '.MuiInputBase-root': { borderRadius: '0.5rem' } }}
+          fullWidth
         />
-        <BaseDatePicker disableFuture label="Date of Birth" sx={{ width: '48%' }} />
+        <TextField
+          id="last-name"
+          placeholder="Doe"
+          label="Last name"
+          variant="outlined"
+          size="small"
+          sx={{ '.MuiInputBase-root': { borderRadius: '0.5rem' } }}
+          fullWidth
+        />
       </Box>
+      <TextField
+        id="about-me"
+        label="Short info"
+        placeholder="About Me"
+        size="small"
+        multiline
+        rows={2}
+        fullWidth
+        margin="normal"
+        sx={{ '.MuiInputBase-root': { borderRadius: '0.5rem' } }}
+      />
+      <LocationSelector />
+      <BaseDatePicker disableFuture label="Date of Birth" sx={{ width: '100%', mt: 2 }} />
     </Box>
   </Box>
 )
