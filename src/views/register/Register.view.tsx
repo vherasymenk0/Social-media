@@ -1,20 +1,17 @@
 'use client'
 import React from 'react'
 
-import BaseButton from '~/components/BaseButton'
+import RegisterForm from '~/views/register/components/Register.form'
 import useStepper from '~/views/register/hooks/useStepper'
-import { REGISTER_STEP_COMPONENT, REGISTER_STEPS } from '~/views/register/Register.constants'
+import { REGISTER_STEPS } from '~/views/register/Register.constants'
 
-import { Box, Container, Typography } from '@mui/material'
+import { Container, Typography } from '@mui/material'
 import Step from '@mui/material/Step'
 import StepLabel from '@mui/material/StepLabel'
 import Stepper from '@mui/material/Stepper'
 
 const RegisterView = () => {
-  const { handleNext, handleBack, currentStep, disableBackBtn } = useStepper()
-
-  const CurrentStepComponent = REGISTER_STEP_COMPONENT[currentStep.step_key]
-  const onSubmit = () => {}
+  const { currentStep, ...rest } = useStepper()
 
   return (
     <Container
@@ -43,26 +40,7 @@ const RegisterView = () => {
           )
         })}
       </Stepper>
-      <Box
-        component="form"
-        autoComplete="off"
-        onSubmit={onSubmit}
-        maxWidth="30rem"
-        sx={{ display: 'flex', flexDirection: 'column', margin: '2rem auto 0' }}
-      >
-        <Box>
-          <CurrentStepComponent />
-        </Box>
-        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-          <BaseButton variant="outlined" disabled={disableBackBtn} onClick={handleBack}>
-            Back
-          </BaseButton>
-          <Box sx={{ flex: '1 1 auto' }} />
-          <BaseButton onClick={handleNext}>
-            {currentStep.index === REGISTER_STEPS.length - 1 ? 'Finish' : 'Next'}
-          </BaseButton>
-        </Box>
-      </Box>
+      <RegisterForm currentStep={currentStep} {...rest} />
     </Container>
   )
 }

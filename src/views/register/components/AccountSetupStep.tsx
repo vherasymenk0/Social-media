@@ -1,8 +1,9 @@
 import React from 'react'
 
-import EmailInput from '~/components/EmailInput'
-import PasswordInput from '~/components/PasswordInput'
+import PasswordField from '~/components/fields/PasswordField'
+import TextField from '~/components/fields/TextField'
 
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 import { Box, Typography } from '@mui/material'
 
 const AccountSetupStep = () => (
@@ -12,9 +13,19 @@ const AccountSetupStep = () => (
         Login Details
       </Typography>
       <Box>
-        <EmailInput />
-        <PasswordInput id="password" label="Password" margin="normal" />
-        <PasswordInput id="confirm_password" label="Confirm password" margin="normal" />
+        <TextField
+          fullWidth
+          sx={{ mb: 2 }}
+          name="email"
+          label="Your Email"
+          type="email"
+          placeholder="exmple@gmail.com"
+          InputProps={{
+            startAdornment: <AlternateEmailIcon fontSize="small" color="primary" />,
+          }}
+        />
+        <PasswordField name="password" label="Password" sx={{ mb: 2 }} />
+        <PasswordField name="confirmPassword" label="Confirm password" />
       </Box>
     </Box>
   </>
