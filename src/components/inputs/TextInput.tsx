@@ -1,18 +1,22 @@
 import React, { FC, forwardRef } from 'react'
 
-import {
-  FormControlProps,
-  FormHelperText,
-  OutlinedInput,
-  OutlinedInputProps,
-  Theme,
-} from '@mui/material'
-import FormControl from '@mui/material/FormControl'
-import InputAdornment from '@mui/material/InputAdornment'
-import InputLabel from '@mui/material/InputLabel'
+import { FormControlProps, FormHelperText, InputAdornment, TextField } from '@mui/material'
 import { styled } from '@mui/material/styles'
+import {
+  FilledTextFieldProps,
+  OutlinedTextFieldProps,
+  StandardTextFieldProps,
+  TextFieldVariants,
+} from '@mui/material/TextField/TextField'
 
-export interface TextInputProps extends OutlinedInputProps {
+type TextInputVariantProps<Variant extends TextFieldVariants = TextFieldVariants> =
+  Variant extends 'filled'
+    ? FilledTextFieldProps
+    : Variant extends 'standard'
+    ? StandardTextFieldProps
+    : OutlinedTextFieldProps
+
+interface CommonTextInputProps {
   value: string
   defaultValue?: string
   formControlProps?: FormControlProps
@@ -21,49 +25,57 @@ export interface TextInputProps extends OutlinedInputProps {
   isError?: boolean
 }
 
+export type TextInputProps = CommonTextInputProps & TextInputVariantProps
+
 const TextInput: FC<TextInputProps> = forwardRef(
   (
     {
       formControlProps,
       isError,
-      id = 'outlined',
+      id,
       label,
       helperText,
       errorMessage,
+      variant = 'outlined',
       sx,
       size,
       fullWidth,
-      startAdornment,
-      endAdornment,
+      InputProps,
       ...restProps
     },
     ref
   ) => {
     const isSmallSize = size === 'small'
     const iconFontSize = isSmallSize ? '1.25rem' : '1.5rem'
+    const { startAdornment, endAdornment } = InputProps || {}
 
     return (
-      <FormControl fullWidth={fullWidth} {...formControlProps} variant="outlined" error={isError}>
-        <InputLabel htmlFor={id} variant="outlined" shrink>
-          {label}
-        </InputLabel>
-        <OutlinedInput
+      <>
+        <TextField
+          fullWidth={fullWidth}
           label={label}
           ref={ref}
           id={id}
           error={isError}
-          sx={{ ...sx, borderRadius: (theme: Theme) => theme.shape.borderRadius }}
+          variant={variant}
           size={size}
-          startAdornment={
-            <InputAdornment position="start" sx={{ fontSize: iconFontSize }}>
-              {startAdornment}
-            </InputAdornment>
-          }
-          endAdornment={
-            <InputAdornment position="end" sx={{ fontSize: iconFontSize }}>
-              {endAdornment}
-            </InputAdornment>
-          }
+          InputProps={{
+            ...(startAdornment && {
+              startAdornment: (
+                <InputAdornment position="start" sx={{ fontSize: iconFontSize }}>
+                  {startAdornment}
+                </InputAdornment>
+              ),
+            }),
+            ...(endAdornment && {
+              endAdornment: (
+                <InputAdornment position="end" sx={{ fontSize: iconFontSize }}>
+                  {endAdornment}
+                </InputAdornment>
+              ),
+            }),
+            sx: { ...sx, borderRadius: (theme) => theme.shape.borderRadius },
+          }}
           {...restProps}
         />
         {!!helperText && !isError && (
@@ -77,7 +89,7 @@ const TextInput: FC<TextInputProps> = forwardRef(
             <>{errorMessage}</>
           </HelperText>
         )}
-      </FormControl>
+      </>
     )
   }
 )
