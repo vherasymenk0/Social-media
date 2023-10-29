@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 
 import BaseButton from '~/components/BaseButton'
 import EmailInput from '~/components/EmailInput'
-import PasswordInput from '~/components/PasswordInput'
+import ControlledPasswordField from '~/components/fields/ControlledPasswordField'
 import StyledCheckbox from '~/components/StyledCheckbox'
 import StyledLink from '~/components/StyledLink'
 
@@ -19,7 +19,7 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
   return (
     <Box component="form" autoComplete="off" onSubmit={onSubmit}>
       <EmailInput sx={{ mb: 3 }} />
-      <PasswordInput label="Your Password" />
+      <ControlledPasswordField label="Your Password" />
       <Stack
         direction="row"
         justifyContent="space-between"

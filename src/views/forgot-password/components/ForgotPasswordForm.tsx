@@ -2,7 +2,7 @@ import React, { FC, useLayoutEffect, useState } from 'react'
 
 import BaseButton from '~/components/BaseButton'
 import EmailInput from '~/components/EmailInput'
-import PasswordInput from '~/components/PasswordInput'
+import ControlledPasswordField from '~/components/fields/ControlledPasswordField'
 import useTimer from '~/hooks/useTimer'
 import Toaster from '~/services/toaster/Toaster.service'
 import ConfirmCode from '~/views/forgot-password/components/ConfirmCode'
@@ -44,7 +44,7 @@ const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({}) => {
   if (isConfirmed)
     return (
       <Box sx={{ width: '25rem' }}>
-        <PasswordInput size="small" placeholder="new password" />
+        <ControlledPasswordField size="small" placeholder="new password" />
         <BaseButton fullWidth type="submit" sx={{ marginTop: '1rem' }} onClick={updatePassword}>
           Update password
         </BaseButton>
