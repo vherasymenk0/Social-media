@@ -18,6 +18,7 @@ const TextField: FC<TextFieldProps> = ({
   value = '',
   defaultValue = '',
   shouldUnregister,
+  id,
   ...restProps
 }) => {
   const { field, formState } = useController({
@@ -39,6 +40,7 @@ const TextField: FC<TextFieldProps> = ({
       errorMessage={String(formState.errors[name])}
       onChange={handleChange}
       value={fieldValue}
+      id={id || name}
       {...restProps}
     />
   )

@@ -16,13 +16,11 @@ const usePasswordField = ({ size }: Props) => {
   const toggleVisiblePassword = () => setShowPassword((show) => !show)
 
   const defaultProps = {
-    formControlProps: {
-      fullWidth: true,
-    },
+    fullWidth: true,
     type: showPassword ? 'text' : 'password',
     autoComplete: 'current-password',
     size,
-    startAdornment: <HttpsIcon color="primary" fontSize="small" sx={{ marginRight: '0.5rem' }} />,
+    startAdornment: <HttpsIcon color="primary" fontSize="small" />,
     endAdornment: (
       <IconButton
         aria-label="toggle password visibility"
@@ -33,6 +31,7 @@ const usePasswordField = ({ size }: Props) => {
         {showPassword ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
       </IconButton>
     ),
+    placeholder: 'password',
   }
 
   return {

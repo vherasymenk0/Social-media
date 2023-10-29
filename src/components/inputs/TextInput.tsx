@@ -26,12 +26,13 @@ const TextInput: FC<TextInputProps> = forwardRef(
     {
       formControlProps,
       isError,
-      id,
+      id = 'outlined',
       label,
       helperText,
       errorMessage,
       sx,
       size,
+      fullWidth,
       startAdornment,
       endAdornment,
       ...restProps
@@ -42,7 +43,7 @@ const TextInput: FC<TextInputProps> = forwardRef(
     const iconFontSize = isSmallSize ? '1.25rem' : '1.5rem'
 
     return (
-      <FormControl {...formControlProps} variant="outlined" error={isError}>
+      <FormControl fullWidth={fullWidth} {...formControlProps} variant="outlined" error={isError}>
         <InputLabel htmlFor={id} variant="outlined" shrink>
           {label}
         </InputLabel>

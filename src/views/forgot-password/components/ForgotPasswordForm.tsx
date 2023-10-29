@@ -1,13 +1,14 @@
 import React, { FC, useLayoutEffect, useState } from 'react'
 
 import BaseButton from '~/components/BaseButton'
-import EmailInput from '~/components/EmailInput'
 import ControlledPasswordField from '~/components/fields/ControlledPasswordField'
+import TextInput from '~/components/inputs/TextInput'
 import useTimer from '~/hooks/useTimer'
 import Toaster from '~/services/toaster/Toaster.service'
 import ConfirmCode from '~/views/forgot-password/components/ConfirmCode'
 import RequestTimer from '~/views/forgot-password/components/RequestTimer'
 
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 import { Box } from '@mui/material'
 
 interface ForgotPasswordFormProps {}
@@ -63,7 +64,16 @@ const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({}) => {
       ) : (
         <>
           <Box display="flex" alignItems="center">
-            <EmailInput size="small" />
+            <TextInput
+              size="small"
+              value=""
+              fullWidth
+              id="email"
+              label="Your Email"
+              type="email"
+              placeholder="exmple@gmail.com"
+              startAdornment={<AlternateEmailIcon fontSize="small" color="primary" />}
+            />
             <BaseButton
               disabled={timerStarted}
               sx={{ width: '8rem', height: '2.5rem', ml: 1 }}

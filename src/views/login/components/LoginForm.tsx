@@ -1,11 +1,12 @@
 import React, { FC } from 'react'
 
 import BaseButton from '~/components/BaseButton'
-import EmailInput from '~/components/EmailInput'
 import ControlledPasswordField from '~/components/fields/ControlledPasswordField'
+import TextInput from '~/components/inputs/TextInput'
 import StyledCheckbox from '~/components/StyledCheckbox'
 import StyledLink from '~/components/StyledLink'
 
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 import { Box } from '@mui/material'
 import Stack from '@mui/material/Stack'
 
@@ -18,7 +19,16 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
 
   return (
     <Box component="form" autoComplete="off" onSubmit={onSubmit}>
-      <EmailInput sx={{ mb: 3 }} />
+      <TextInput
+        value=""
+        fullWidth
+        sx={{ mb: 3 }}
+        id="email"
+        label="Your Email"
+        type="email"
+        placeholder="exmple@gmail.com"
+        startAdornment={<AlternateEmailIcon fontSize="small" color="primary" />}
+      />
       <ControlledPasswordField label="Your Password" />
       <Stack
         direction="row"
