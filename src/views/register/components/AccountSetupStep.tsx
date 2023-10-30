@@ -1,7 +1,6 @@
-import React from 'react'
-
+import ControllerField from '~/components/fields/ControllerField'
 import PasswordField from '~/components/fields/PasswordField'
-import TextField from '~/components/fields/TextField'
+import TextInput from '~/components/inputs/TextInput'
 
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 import { Box, Typography } from '@mui/material'
@@ -13,16 +12,21 @@ const AccountSetupStep = () => (
         Login Details
       </Typography>
       <Box>
-        <TextField
-          fullWidth
-          sx={{ mb: 2 }}
+        <ControllerField
           name="email"
-          label="Your Email"
-          type="email"
-          placeholder="exmple@gmail.com"
-          InputProps={{
-            startAdornment: <AlternateEmailIcon fontSize="small" color="primary" />,
-          }}
+          render={({ field, isError }) => (
+            <TextInput
+              {...field}
+              error={isError}
+              InputProps={{
+                startAdornment: <AlternateEmailIcon fontSize="small" color="primary" />,
+              }}
+              placeholder="example@gmail.com"
+              type="email"
+              label="Your Email"
+              fullWidth
+            />
+          )}
         />
         <PasswordField name="password" label="Password" sx={{ mb: 2 }} />
         <PasswordField name="confirmPassword" label="Confirm password" />

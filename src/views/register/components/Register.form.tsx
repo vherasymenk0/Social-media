@@ -1,10 +1,12 @@
 import React, { FC } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import * as yup from 'yup'
 
 import BaseButton from '~/components/BaseButton'
 import { REGISTER_STEP_COMPONENT, REGISTER_STEPS } from '~/views/register/Register.constants'
 import { Step } from '~/views/register/Register.types'
 
+import { yupResolver } from '@hookform/resolvers/yup'
 import { Box } from '@mui/material'
 
 interface RegisterFormProps {
@@ -14,6 +16,12 @@ interface RegisterFormProps {
   handleNext: () => void
   handleBack: () => void
 }
+
+const schema = yup.object({
+  email: yup.string().required(),
+  password: yup.number().positive().integer().required(),
+  dateOfBirth: yup.string(),
+})
 
 const RegisterForm: FC<RegisterFormProps> = ({
   currentStep,
@@ -35,10 +43,13 @@ const RegisterForm: FC<RegisterFormProps> = ({
       city: '',
       dateOfBirth: '',
     },
+    resolver: yupResolver(schema),
+    mode: 'onChange',
   })
   const onSubmit = () => {}
 
-  console.log('watch -->', methods.watch())
+  const { watch } = methods
+  console.log('watch -->', watch())
   return (
     <FormProvider {...methods}>
       <Box

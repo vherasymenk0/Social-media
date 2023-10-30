@@ -1,61 +1,67 @@
 'use client'
-import React from 'react'
-import { Controller, useFormContext } from 'react-hook-form'
-
 import BaseDatePicker from '~/components/BaseDatePicker'
-import TextField from '~/components/fields/TextField'
+import ControllerField from '~/components/fields/ControllerField'
+import TextInput from '~/components/inputs/TextInput'
 import LocationSelector from '~/views/register/components/LocationSelector'
 
 import { Box, Typography } from '@mui/material'
 
-const PersonalDetailsStep = () => {
-  const { control } = useFormContext()
-
-  return (
+const PersonalDetailsStep = () => (
+  <Box>
+    <Typography variant="h4" component="h1" marginBottom="2rem" align="center">
+      Profile Details
+    </Typography>
     <Box>
-      <Typography variant="h4" component="h1" marginBottom="2rem" align="center">
-        Profile Details
-      </Typography>
-      <Box>
-        <Box display="flex" justifyContent="space-between" gap={2}>
-          <TextField
-            fullWidth
-            sx={{ mb: 2 }}
-            name="firstName"
-            label="First name"
-            placeholder="John"
-            size="small"
-          />
-          <TextField
-            fullWidth
-            sx={{ mb: 2 }}
-            name="lastName"
-            label="Last name"
-            placeholder="Doe"
-            size="small"
-          />
-        </Box>
-        <TextField
-          fullWidth
-          sx={{ mb: 2 }}
-          name="shortInfo"
-          label="Short info"
-          placeholder="About Me"
-          size="small"
-          multiline
-          rows={2}
+      <Box display="flex" justifyContent="space-between" gap={2}>
+        <ControllerField
+          name="firstName"
+          render={({ field, isError }) => (
+            <TextInput
+              fullWidth
+              label="First name"
+              placeholder="John"
+              size="small"
+              {...field}
+              error={isError}
+            />
+          )}
         />
-        <LocationSelector />
-        <Controller
-          name="dateOfBirth"
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <BaseDatePicker value={value} onChange={onChange} label="Date picker" />
+        <ControllerField
+          name="lastName"
+          render={({ field, isError }) => (
+            <TextInput
+              fullWidth
+              label="Last name"
+              placeholder="Doe"
+              size="small"
+              {...field}
+              error={isError}
+            />
           )}
         />
       </Box>
+      <ControllerField
+        name="shortInfo"
+        render={({ field, isError }) => (
+          <TextInput
+            fullWidth
+            label="Short info"
+            placeholder="About Me"
+            size="small"
+            multiline
+            rows={2}
+            {...field}
+            error={isError}
+          />
+        )}
+      />
+      <LocationSelector />
+      <ControllerField
+        name="dateOfBirth"
+        render={({ field, isError }) => <BaseDatePicker label="Date picker" {...field} />}
+      />
     </Box>
-  )
-}
+  </Box>
+)
 
 export default PersonalDetailsStep
