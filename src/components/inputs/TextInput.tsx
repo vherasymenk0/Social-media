@@ -1,7 +1,6 @@
-import React, { FC, forwardRef } from 'react'
+import { FC, forwardRef } from 'react'
 
-import { FormControlProps, FormHelperText, InputAdornment, TextField } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { FormControlProps, InputAdornment, TextField } from '@mui/material'
 import {
   FilledTextFieldProps,
   OutlinedTextFieldProps,
@@ -74,29 +73,13 @@ const TextInput: FC<TextInputProps> = forwardRef(
                 </InputAdornment>
               ),
             }),
-            sx: { ...sx, borderRadius: (theme) => theme.shape.borderRadius },
+            sx: { borderRadius: (theme) => theme.shape.borderRadius, mb: 2, ...sx },
           }}
           {...restProps}
         />
-        {!!helperText && !isError && (
-          <HelperText id={id} variant="filled">
-            {helperText}
-          </HelperText>
-        )}
-
-        {isError && (
-          <HelperText id={id} error={isError}>
-            <>{errorMessage}</>
-          </HelperText>
-        )}
       </>
     )
   }
 )
-
-const HelperText = styled(FormHelperText)({
-  lineHeight: 1,
-  marginTop: 0,
-})
 
 export default TextInput

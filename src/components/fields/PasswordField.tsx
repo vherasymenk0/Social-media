@@ -1,12 +1,29 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 
-import TextField, { TextFieldProps } from '~/components/fields/TextField'
+import ControllerField from '~/components/fields/ControllerField'
+import TextInput, { TextInputProps } from '~/components/inputs/TextInput'
 import usePasswordField from '~/hooks/usePasswordField'
 
-const PasswordField: FC<TextFieldProps> = ({ size, sx, ...props }) => {
+interface Props extends Omit<TextInputProps, 'name' | 'value'> {
+  name: string
+}
+
+const PasswordField: FC<Props> = ({ size, sx, name, ...props }) => {
   const { defaultProps } = usePasswordField({ size })
 
-  return <TextField {...defaultProps} sx={sx} {...props} />
+  const allProps = {
+    ...defaultProps,
+    ...props,
+  }
+
+  return (
+    <ControllerField
+      name={name}
+      render={({ field, isError }) => (
+        <TextInput {...allProps} sx={sx} {...field} error={isError} />
+      )}
+    />
+  )
 }
 
 export default PasswordField
