@@ -1,5 +1,5 @@
 'use client'
-import BaseDatePicker from '~/components/BaseDatePicker'
+import DatePicker from '~/components/DatePicker'
 import ControllerField from '~/components/fields/ControllerField'
 import TextInput from '~/components/inputs/TextInput'
 import LocationSelector from '~/views/register/components/LocationSelector'
@@ -58,7 +58,7 @@ const PersonalDetailsStep = () => (
       <LocationSelector />
       <ControllerField
         name="dateOfBirth"
-        render={({ field, isError }) => <BaseDatePicker label="Date picker" {...field} />}
+        render={({ field, isError }) => <DatePicker isError={isError} {...field} />}
       />
     </Box>
   </Box>

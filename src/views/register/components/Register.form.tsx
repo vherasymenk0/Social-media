@@ -20,7 +20,7 @@ interface RegisterFormProps {
 const schema = yup.object({
   email: yup.string().required(),
   password: yup.number().positive().integer().required(),
-  dateOfBirth: yup.string(),
+  dateOfBirth: yup.string().required(),
 })
 
 const RegisterForm: FC<RegisterFormProps> = ({
