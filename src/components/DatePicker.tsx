@@ -1,3 +1,5 @@
+import { FC, forwardRef } from 'react'
+
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker as MUIDatePicker } from '@mui/x-date-pickers/DatePicker'
 import { DatePickerProps } from '@mui/x-date-pickers/DatePicker/DatePicker.types'
@@ -7,12 +9,13 @@ interface Props extends DatePickerProps<AdapterDayjs> {
   isError: boolean
 }
 
-const DatePicker = ({ isError, ...restProps }: Props) => (
+const DatePicker = forwardRef<HTMLDivElement, Props>(({ isError, ...restProps }, ref) => (
   <LocalizationProvider dateAdapter={AdapterDayjs}>
     <MUIDatePicker
       {...restProps}
       label="Date picker"
       disableFuture
+      ref={ref}
       slotProps={{
         textField: {
           // disabled: true,
@@ -25,5 +28,5 @@ const DatePicker = ({ isError, ...restProps }: Props) => (
       }}
     />
   </LocalizationProvider>
-)
+))
 export default DatePicker

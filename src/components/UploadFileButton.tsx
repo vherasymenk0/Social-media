@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, InputHTMLAttributes } from 'react'
+import { ChangeEvent, InputHTMLAttributes, forwardRef } from 'react'
 
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -14,6 +14,69 @@ interface Props {
   file: File | null
   inputProps?: InputHTMLAttributes<HTMLInputElement>
 }
+
+const UploadFileButton = forwardRef<HTMLButtonElement, Props>(
+  ({ handleChange, handleReset, file, fullWidth = false, inputProps }, ref) => {
+    const commonBtnProps: ButtonProps = {
+      fullWidth: fullWidth,
+      variant: 'contained',
+    }
+
+    const DeleteBtn = (
+      <Button
+        onClick={handleReset}
+        startIcon={<DeleteIcon />}
+        color="error"
+        ref={ref}
+        {...commonBtnProps}
+      >
+        Delete file
+      </Button>
+    )
+
+    const UploadBtn = (
+      <Button
+        component="label"
+        fullWidth
+        startIcon={<CloudUploadIcon />}
+        ref={ref}
+        {...commonBtnProps}
+      >
+        Upload file
+        <VisuallyHiddenInput {...inputProps} type="file" onChange={handleChange} />
+      </Button>
+    )
+
+    return (
+      <>
+        {file ? (
+          <>
+            {DeleteBtn}
+            <Tooltip title={file?.name} arrow>
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  width: '12.5rem',
+                }}
+                color="gray"
+                mt={1}
+                align="center"
+              >
+                {file?.name}
+              </Typography>
+            </Tooltip>
+          </>
+        ) : (
+          UploadBtn
+        )}
+      </>
+    )
+  }
+)
+
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
   clipPath: 'inset(50%)',
@@ -25,59 +88,5 @@ const VisuallyHiddenInput = styled('input')({
   whiteSpace: 'nowrap',
   width: 1,
 })
-
-const UploadFileButton: FC<Props> = ({
-  handleChange,
-  handleReset,
-  file,
-  fullWidth = false,
-  inputProps,
-}) => {
-  const commonBtnProps: ButtonProps = {
-    fullWidth: fullWidth,
-    variant: 'contained',
-  }
-
-  const DeleteBtn = (
-    <Button onClick={handleReset} startIcon={<DeleteIcon />} color="error" {...commonBtnProps}>
-      Delete file
-    </Button>
-  )
-
-  const UploadBtn = (
-    <Button component="label" fullWidth startIcon={<CloudUploadIcon />} {...commonBtnProps}>
-      Upload file
-      <VisuallyHiddenInput {...inputProps} type="file" onChange={handleChange} />
-    </Button>
-  )
-
-  return (
-    <>
-      {file ? (
-        <>
-          {DeleteBtn}
-          <Tooltip title={file?.name} arrow>
-            <Typography
-              variant="subtitle2"
-              sx={{
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                width: '12.5rem',
-              }}
-              color="gray"
-              mt={1}
-              align="center"
-            >
-              {file?.name}
-            </Typography>
-          </Tooltip>
-        </>
-      ) : (
-        UploadBtn
-      )}
-    </>
-  )
-}
 
 export default UploadFileButton
