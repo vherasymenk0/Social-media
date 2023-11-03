@@ -1,8 +1,9 @@
-import { useRef, useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 import AvatarEditor from 'react-avatar-editor'
+import { useFormContext } from 'react-hook-form'
 
 type AvatarState = {
-  image: string | File | null
+  image: File | null
   scale: number
   previewImage: string | null
 }
@@ -13,18 +14,23 @@ const initAvatarState = {
   previewImage: null,
 }
 
-const useProfilePhotoUpload = () => {
+const useProfilePhotoUpload = ({ name }: { name: string }) => {
   const [avatarState, setAvatarState] = useState<AvatarState>(initAvatarState)
   const editorRef = useRef<AvatarEditor>(null)
+  const { setValue } = useFormContext()
 
-  const handleLoadFile = (file: File) => {
+  const onUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target?.files?.[0]
+    if (!file) return
+
+    setValue(name, file)
     setAvatarState((prev) => ({
       ...prev,
       image: file,
     }))
   }
 
-  const handleReset = () => {
+  const onReset = () => {
     setAvatarState(initAvatarState)
   }
 
@@ -47,8 +53,8 @@ const useProfilePhotoUpload = () => {
   }
 
   return {
-    handleLoadFile,
-    handleReset,
+    onUpload,
+    onReset,
     onScale,
     preparePreviewImage,
     avatarState,

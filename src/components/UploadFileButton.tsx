@@ -1,16 +1,18 @@
-import React, { ChangeEvent, FC, useState } from 'react'
+import { ChangeEvent, FC, InputHTMLAttributes } from 'react'
 
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { Typography } from '@mui/material'
+import { Tooltip, Typography } from '@mui/material'
 import Button from '@mui/material/Button'
 import { ButtonProps } from '@mui/material/Button/Button'
 import { styled } from '@mui/system'
 
 interface Props {
-  handleChange?: (file: File) => void
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void
   handleReset?: () => void
   fullWidth: boolean
+  file: File | null
+  inputProps?: InputHTMLAttributes<HTMLInputElement>
 }
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -24,29 +26,20 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 })
 
-const UploadFileButton: FC<Props> = ({ handleChange, handleReset, fullWidth = false }) => {
-  const [file, setFile] = useState<File | null>(null)
-
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const loadedFile = e?.target?.files?.[0]
-
-    if (!loadedFile) return
-    setFile(loadedFile)
-    handleChange && handleChange(loadedFile)
-  }
-
-  const onReset = () => {
-    setFile(null)
-    handleReset && handleReset()
-  }
-
+const UploadFileButton: FC<Props> = ({
+  handleChange,
+  handleReset,
+  file,
+  fullWidth = false,
+  inputProps,
+}) => {
   const commonBtnProps: ButtonProps = {
     fullWidth: fullWidth,
     variant: 'contained',
   }
 
   const DeleteBtn = (
-    <Button onClick={onReset} startIcon={<DeleteIcon />} color="error" {...commonBtnProps}>
+    <Button onClick={handleReset} startIcon={<DeleteIcon />} color="error" {...commonBtnProps}>
       Delete file
     </Button>
   )
@@ -54,17 +47,34 @@ const UploadFileButton: FC<Props> = ({ handleChange, handleReset, fullWidth = fa
   const UploadBtn = (
     <Button component="label" fullWidth startIcon={<CloudUploadIcon />} {...commonBtnProps}>
       Upload file
-      <VisuallyHiddenInput name="newImage" type="file" onChange={onChange} />
+      <VisuallyHiddenInput {...inputProps} type="file" onChange={handleChange} />
     </Button>
   )
 
   return (
     <>
-      {file ? DeleteBtn : UploadBtn}
-      {file?.name && (
-        <Typography variant="subtitle2" color="gray" mt={1} align="center">
-          {file?.name}
-        </Typography>
+      {file ? (
+        <>
+          {DeleteBtn}
+          <Tooltip title={file?.name} arrow>
+            <Typography
+              variant="subtitle2"
+              sx={{
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                width: '12.5rem',
+              }}
+              color="gray"
+              mt={1}
+              align="center"
+            >
+              {file?.name}
+            </Typography>
+          </Tooltip>
+        </>
+      ) : (
+        UploadBtn
       )}
     </>
   )

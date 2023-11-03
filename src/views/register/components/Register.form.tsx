@@ -42,6 +42,7 @@ const RegisterForm: FC<RegisterFormProps> = ({
       country: '',
       city: '',
       dateOfBirth: '',
+      profileImg: '',
     },
     resolver: yupResolver(schema),
     mode: 'onChange',

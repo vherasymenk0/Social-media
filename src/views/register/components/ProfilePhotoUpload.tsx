@@ -1,7 +1,8 @@
 import Image from 'next/image'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import AvatarEditor from 'react-avatar-editor'
 
+import ControllerField from '~/components/fields/ControllerField'
 import UploadFileButton from '~/components/UploadFileButton'
 import useProfilePhotoUpload from '~/views/register/hooks/useProfilePhotoUpload'
 
@@ -15,9 +16,9 @@ interface Props {
   avatarHeight?: number
 }
 
-const ProfilePhotoUpload: FC<Props> = ({ avatarWidth = 200, avatarHeight = 250 }) => {
-  const { onScale, handleReset, handleLoadFile, preparePreviewImage, avatarState, editorRef } =
-    useProfilePhotoUpload()
+const ProfilePhotoUpload: FC<Props> = ({ avatarWidth = 200, avatarHeight = 200 }) => {
+  const { onScale, onReset, onUpload, preparePreviewImage, avatarState, editorRef } =
+    useProfilePhotoUpload({ name: 'profileImg' })
 
   return (
     <Box
@@ -29,10 +30,21 @@ const ProfilePhotoUpload: FC<Props> = ({ avatarWidth = 200, avatarHeight = 250 }
       }}
     >
       <Box width="12.5rem" mb={2}>
-        <UploadFileButton handleChange={handleLoadFile} handleReset={handleReset} fullWidth />
+        <ControllerField
+          name="profileImg"
+          render={({ field: { onChange: _, ...rest } }) => (
+            <UploadFileButton
+              {...rest}
+              handleChange={onUpload}
+              handleReset={onReset}
+              fullWidth
+              file={avatarState.image}
+            />
+          )}
+        />
       </Box>
       {avatarState.image && (
-        <Box display="flex" flexDirection="column" justifyContent="center">
+        <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
           <Box display="flex" justifyContent="space-between" alignItems="center" width="30rem">
             <AvatarEditor
               ref={editorRef}
@@ -41,7 +53,8 @@ const ProfilePhotoUpload: FC<Props> = ({ avatarWidth = 200, avatarHeight = 250 }
               width={avatarWidth}
               height={avatarHeight}
               image={avatarState.image}
-              border={20}
+              border={10}
+              borderRadius={100}
               onMouseUp={preparePreviewImage}
             />
             {avatarState.previewImage && (
@@ -54,6 +67,7 @@ const ProfilePhotoUpload: FC<Props> = ({ avatarWidth = 200, avatarHeight = 250 }
                   height={avatarHeight}
                   alt="avatar"
                   src={avatarState.previewImage}
+                  style={{ borderRadius: 100 }}
                 />
               </Box>
             )}
