@@ -1,10 +1,11 @@
-import React, { FC } from 'react'
+import React, { forwardRef } from 'react'
 
 import { Paper } from '@mui/material'
 import { PaperOwnProps } from '@mui/material/Paper/Paper'
 
-const PaperCard: FC<PaperOwnProps> = ({ children, sx, ...props }) => (
+const PaperCard = forwardRef<HTMLDivElement, PaperOwnProps>(({ children, sx, ...props }, ref) => (
   <Paper
+    ref={ref}
     sx={{
       borderRadius: '0.75rem',
       padding: '1rem',
@@ -16,6 +17,6 @@ const PaperCard: FC<PaperOwnProps> = ({ children, sx, ...props }) => (
   >
     {children}
   </Paper>
-)
+))
 
 export default PaperCard

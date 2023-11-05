@@ -19,8 +19,15 @@ interface RegisterFormProps {
 
 const schema = yup.object({
   email: yup.string().required(),
-  password: yup.number().positive().integer().required(),
+  password: yup.string().required(),
+  confirmPassword: yup.string().required(),
+  firstName: yup.string().required(),
+  lastName: yup.string().required(),
+  shortInfo: yup.string(),
+  country: yup.string().required(),
+  city: yup.string().required(),
   dateOfBirth: yup.string().required(),
+  profileImg: yup.string(),
 })
 
 const RegisterForm: FC<RegisterFormProps> = ({

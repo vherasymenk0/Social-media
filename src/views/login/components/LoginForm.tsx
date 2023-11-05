@@ -27,7 +27,7 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
         label="Your Email"
         type="email"
         placeholder="exmple@gmail.com"
-        startAdornment={<AlternateEmailIcon fontSize="small" color="primary" />}
+        InputProps={{ startAdornment: <AlternateEmailIcon fontSize="small" color="primary" /> }}
       />
       <ControlledPasswordField label="Your Password" />
       <Stack

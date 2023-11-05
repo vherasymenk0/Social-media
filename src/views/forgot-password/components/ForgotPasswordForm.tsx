@@ -72,7 +72,9 @@ const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({}) => {
               label="Your Email"
               type="email"
               placeholder="exmple@gmail.com"
-              startAdornment={<AlternateEmailIcon fontSize="small" color="primary" />}
+              inputProps={{
+                startAdornment: <AlternateEmailIcon fontSize="small" color="primary" />,
+              }}
             />
             <BaseButton
               disabled={timerStarted}

@@ -1,5 +1,5 @@
 import NextLink from 'next/link'
-import React, { FC } from 'react'
+import React, { forwardRef } from 'react'
 
 import Link from '@mui/material/Link'
 import { LinkOwnProps } from '@mui/material/Link/Link'
@@ -9,10 +9,10 @@ interface StyledLinkProps extends LinkOwnProps {
   href: string
 }
 
-const StyledLink: FC<StyledLinkProps> = React.forwardRef(
-  ({ children, href, underline = 'hover', color = 'primary', ...props }) => (
+const StyledLink = forwardRef<HTMLAnchorElement, StyledLinkProps>(
+  ({ children, href, underline = 'hover', color = 'primary', ...props }, ref) => (
     <NextLink href={href} passHref legacyBehavior>
-      <Link underline={underline} color={color} {...props}>
+      <Link underline={underline} color={color} ref={ref} {...props}>
         {children}
       </Link>
     </NextLink>
