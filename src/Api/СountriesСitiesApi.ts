@@ -1,11 +1,12 @@
 import Axios from '~/services/Axios.service'
+import { CountriesModel } from '~/types/models/countriesCities.model'
 import { COUNTRIES_CITIES_CONFIG } from '~/utils/constants/axios.constants'
 
 type AxiosType = typeof Axios
 
 function CountriesCitiesMixin<TBase extends AnyConstructor>(Base: TBase & AxiosType) {
   return class CountriesCities extends Base {
-    getAllCountries = (): Promise<void> => this.get('/countries')
+    getAllCountries = (): Promise<CountriesModel[]> => this.get('/countries')
   }
 }
 
