@@ -16,7 +16,7 @@ type TextInputVariantProps<Variant extends TextFieldVariants = TextFieldVariants
     : OutlinedTextFieldProps
 
 interface CommonTextInputProps {
-  value: string
+  value?: string
   defaultValue?: string
   formControlProps?: FormControlProps
   helperText?: string
@@ -46,7 +46,7 @@ const TextInput: FC<TextInputProps> = forwardRef(
   ) => {
     const isSmallSize = size === 'small'
     const iconFontSize = isSmallSize ? '1.25rem' : '1.5rem'
-    const { startAdornment, endAdornment } = InputProps || {}
+    const { startAdornment, endAdornment, ...restInputProps } = InputProps || {}
 
     return (
       <>
@@ -74,6 +74,7 @@ const TextInput: FC<TextInputProps> = forwardRef(
               ),
             }),
             sx: { borderRadius: (theme) => theme.shape.borderRadius, mb: 2, ...sx },
+            ...restInputProps,
           }}
           {...restProps}
         />

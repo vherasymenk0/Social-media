@@ -41,4 +41,5 @@ const theme = createTheme({
   },
 })
 
+export type ThemeType = typeof theme
 export default theme
